@@ -12,7 +12,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:Label Text="" runat="server" ID="QueryStringLabel"/>
+        <asp:TextBox runat="server" ID="QueryStringLabel" TextMode="MultiLine" Width="800" Height="800" />
     </div>
     </form>
 </body>

@@ -11,17 +11,17 @@ namespace Galleriet
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            QueryStringLabel.Text = Request.Url.PathAndQuery + " ";
-            QueryStringLabel.Text += Request.Url.Query + " ";
-            QueryStringLabel.Text += Request.Url.OriginalString + " ";
-            QueryStringLabel.Text += Request.Url.LocalPath + " ";
-            QueryStringLabel.Text += Request.Url.Fragment + " ";
-            QueryStringLabel.Text += Request.Url.AbsoluteUri + " ";
-            QueryStringLabel.Text += Request.Url.AbsolutePath + " ";
-            QueryStringLabel.Text += Request.RawUrl + " ";
-            QueryStringLabel.Text += Request.PathInfo + " ";
-            QueryStringLabel.Text += Request.Path + " ";
-            QueryStringLabel.Text += Request.FilePath + " ";
+            QueryStringLabel.Text = Request.Url.PathAndQuery + "\n";
+            QueryStringLabel.Text += Request.Url.Query + "\n";
+            QueryStringLabel.Text += Request.Url.OriginalString + "\n";
+            QueryStringLabel.Text += Request.Url.LocalPath + "\n";
+            QueryStringLabel.Text += Request.Url.Fragment + "\n";
+            QueryStringLabel.Text += Request.Url.AbsoluteUri + "\n";
+            QueryStringLabel.Text += Request.Url.AbsolutePath + "\n";
+            QueryStringLabel.Text += Request.RawUrl + "\n";
+            QueryStringLabel.Text += Request.PathInfo + "\n";
+            QueryStringLabel.Text += Request.Path + "\n";
+            QueryStringLabel.Text += Request.FilePath + "\n";
             
         }
     }
