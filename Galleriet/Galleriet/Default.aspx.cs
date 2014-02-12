@@ -24,5 +24,13 @@ namespace Galleriet
             QueryStringLabel.Text += Request.FilePath + "\n";
             
         }
+
+        protected void UploadButton_Click(object sender, EventArgs e)
+        {
+            QueryStringLabel.Text += String.Join(" ",FileUpload1.FileName.Split('.'));
+            QueryStringLabel.Text += FileUpload1.FileName.Split('.').Last()+"\n";
+            QueryStringLabel.Text += System.IO.Path.GetExtension(FileUpload1.FileName);
+            Response.Redirect(Request.Path + "/Yes");
+        }
     }
 }
