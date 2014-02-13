@@ -13,6 +13,7 @@ namespace Galleriet
         {
             QueryStringLabel.Text = Request.Url.PathAndQuery + "\n";
             QueryStringLabel.Text += Request.Url.Query + "\n";
+            QueryStringLabel.Text += Request.QueryString["name"] + "\n";
             QueryStringLabel.Text += Request.Url.OriginalString + "\n";
             QueryStringLabel.Text += Request.Url.LocalPath + "\n";
             QueryStringLabel.Text += Request.Url.Fragment + "\n";
