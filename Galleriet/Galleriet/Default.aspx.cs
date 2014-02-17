@@ -26,7 +26,7 @@ namespace Galleriet
             QueryStringLabel.Text += Request.PathInfo + "\n";
             QueryStringLabel.Text += Request.Path + "\n";
             QueryStringLabel.Text += Request.FilePath + "\n";
-            
+            QueryStringLabel.Text += AppDomain.CurrentDomain.GetData("APPBASE").ToString();
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)

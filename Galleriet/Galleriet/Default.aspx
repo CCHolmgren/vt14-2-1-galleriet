@@ -34,7 +34,7 @@
     <div>
         <asp:TextBox runat="server" ID="QueryStringLabel" TextMode="MultiLine" Width="800" Height="800" />
         <asp:RequiredFieldValidator ErrorMessage="Du måste välja en fil först!" ControlToValidate="FileUpload1" runat="server" />
-        <asp:RegularExpressionValidator ErrorMessage="errormessage" ControlToValidate="QueryStringLabel" runat="server" />
+        <asp:RegularExpressionValidator ErrorMessage="errormessage" ControlToValidate="FileUpload1" runat="server" ValidationExpression="^.*\.(jpg|png|gif)$" />
         <asp:FileUpload ID="FileUpload1" runat="server" />
         <asp:Button Text="Ladda upp" ID="UploadButton" runat="server" OnClick="UploadButton_Click" />
     </div>
