@@ -39,8 +39,10 @@ namespace Galleriet
             QueryStringLabel.Text += FileUpload1.FileName.Split('.').Last()+"\n";
             QueryStringLabel.Text += System.IO.Path.GetExtension(FileUpload1.FileName);
 
+            
             Gallery g = (Gallery)Page.Session["gallery"];
-            g.SaveImage(FileUpload1.FileContent, FileUpload1.FileName);
+            FileUpload1.
+            g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
             Response.Redirect("?file=" + FileUpload1.FileName);
         }
     }
