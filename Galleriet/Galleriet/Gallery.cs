@@ -32,10 +32,14 @@ namespace Galleriet
             }
             return files;
         }
-        public string GetImagePath(string name)
+        public static string GetImagePath(string name, bool thumb = false)
         {
-            if (name != null && ImageExsists(name))
-                return Path.Combine(PhysicalUploadedImagesPath, name);
+            if (name == null)
+                return "";
+            if (thumb)
+                return Path.Combine("images/thumbnails", name);
+            else if (ImageExsists(name))
+                return Path.Combine("Images", name);
             return "";
         }
         public static bool ImageExsists(string name)
@@ -44,10 +48,17 @@ namespace Galleriet
         }
         public bool IsValidImage(Image image)
         {
-            return image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Gif.Guid || image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Png.Guid || image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Jpeg.Guid;
+            return true;
+            //return image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Gif.Guid || image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Png.Guid || image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Jpeg.Guid;
         }
         public string SaveImage(Stream stream, string fileName)
         {
+            using(var fs = File.Create(Path.Combine(PhysicalUploadedImagesPath, fileName)))
+            {
+                stream.CopyTo(fs);
+            }
+            return "";
+            /*
             fileName = SanitizePath.Replace(fileName, "");
             if (!ApprovedExtensions.IsMatch(fileName))
                 throw new ArgumentException();
@@ -79,7 +90,8 @@ namespace Galleriet
             {
                 stream.CopyTo(fs);
             }
-            return Path.Combine(PhysicalUploadedImagesPath, tempFileName);
+            return Path.Combine(PhysicalUploadedImagesPath, tempFileName);*/
         }
+        
     }
 }

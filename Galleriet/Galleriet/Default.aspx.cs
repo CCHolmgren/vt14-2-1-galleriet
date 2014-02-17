@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,8 +14,14 @@ namespace Galleriet
         {
             if (!Page.IsPostBack)
                 Page.Session["gallery"] = new Gallery();
+
             Gallery g = (Gallery)Page.Session["gallery"];
-            Largeimage.ImageUrl = g.GetImagePath(Request.QueryString["file"]);
+            Largeimage.ImageUrl = Gallery.GetImagePath(Request.QueryString["file"]);
+            Largeimage.Visible = true;
+            foreach(string s in g.GetImageNames())
+            {
+                QueryStringLabel.Text += s + "\n";
+            }
             /*QueryStringLabel.Text = Request.Url.PathAndQuery + "\n";
             QueryStringLabel.Text += Request.Url.Query + "\n";
             QueryStringLabel.Text += Request.QueryString["file"] + "\n";
@@ -41,9 +48,21 @@ namespace Galleriet
 
             
             Gallery g = (Gallery)Page.Session["gallery"];
-            FileUpload1.
+            
             g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
             Response.Redirect("?file=" + FileUpload1.FileName);
+        }
+
+        public IEnumerable<Galleriet.LinkData> repeater_GetData()
+        {
+            var di = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), @"Images"));
+            return (from fi in di.GetFiles()
+                    select new LinkData
+                    {
+                        Name = fi.Name,
+                        Link = fi.FullName,
+                        thumbLink = Gallery.GetImagePath(fi.Name, true)
+                    }).AsEnumerable();
         }
     }
 }

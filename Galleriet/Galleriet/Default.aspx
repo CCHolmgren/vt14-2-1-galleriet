@@ -12,24 +12,14 @@
     <h1>Galleriet</h1>
     <form id="form1" runat="server">
         <div>
-            <asp:Image ImageUrl="imageurl" ID="Largeimage" runat="server" />
-            <asp:Panel runat="server">
-                <asp:HyperLink NavigateUrl="navigateurl" runat="server">
-                    <asp:Image ImageUrl="imageurl" runat="server" />
-                </asp:HyperLink>
-                <asp:HyperLink NavigateUrl="navigateurl" runat="server">
-                    <asp:Image ImageUrl="imageurl" runat="server" />
-                </asp:HyperLink>
-                <asp:HyperLink NavigateUrl="navigateurl" runat="server">
-                    <asp:Image ImageUrl="imageurl" runat="server" />
-                </asp:HyperLink>
-                <asp:HyperLink NavigateUrl="navigateurl" runat="server">
-                    <asp:Image ImageUrl="imageurl" runat="server" />
-                </asp:HyperLink>
-                <asp:HyperLink NavigateUrl="navigateurl" runat="server">
-                    <asp:Image ImageUrl="imageurl" runat="server" />
-                </asp:HyperLink>
-            </asp:Panel>
+            <asp:Image ImageUrl="imageurl" ID="Largeimage" runat="server" Visible="false"/>
+            <asp:Repeater ID="repeater" runat="server" ItemType="Galleriet.LinkData" SelectMethod="repeater_GetData">
+                <ItemTemplate>
+                    <asp:HyperLink NavigateUrl="<%# Item.Link %>" runat="server">
+                        <asp:Image ImageUrl="<%# Item.thumbLink  %>" runat="server" />
+                    </asp:HyperLink>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
     <div>
         <asp:TextBox runat="server" ID="QueryStringLabel" TextMode="MultiLine" Width="800" Height="800" />
