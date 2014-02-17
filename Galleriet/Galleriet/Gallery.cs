@@ -61,12 +61,16 @@ namespace Galleriet
             string thumbnailPath = Path.Combine(PhysicalUploadedImagesPath, "thumbnails");
             var image = System.Drawing.Image.FromStream(thumbStream);
             int counter = 0;
-            /*while (File.Exists(Path.Combine(thumbnailPath, fileName)))
+            while (true)
             {
-                tempFileName = Path.GetFileNameWithoutExtension(fileName) + counter + Path.GetExtension(fileName);
-            }*/
+                if (File.Exists(Path.Combine(thumbnailPath, tempFileName)))
+                    tempFileName = Path.GetFileNameWithoutExtension(fileName) + counter + Path.GetExtension(fileName);
+                else
+                    break;
+                counter += 1;
+            }
             stream.Position = 0;
-            using(var fs = File.Create(Path.Combine(PhysicalUploadedImagesPath, fileName)))
+            using(var fs = File.Create(Path.Combine(PhysicalUploadedImagesPath, tempFileName)))
             {
                 stream.CopyTo(fs);
             }
