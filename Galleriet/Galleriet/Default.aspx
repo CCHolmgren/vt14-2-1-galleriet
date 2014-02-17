@@ -13,23 +13,28 @@
     <form id="form1" runat="server">
         <div>
             <asp:Image ImageUrl="imageurl" ID="Largeimage" runat="server" />
-            <div>
-                <a href="#"><asp:Image runat="server" /></a>
-                <a href="#"><asp:Image runat="server" /></a>
-                <a href="#"><asp:Image runat="server" /></a>
-                <a href="#"><asp:Image runat="server" /></a>
-                <a href="#"><asp:Image runat="server" /></a>
-                <a href="#"><asp:Image runat="server" /></a>
-                <a href="#"><asp:Image runat="server" /></a>
-                <a href="#"><asp:Image runat="server" /></a>
-                <a href="#"><asp:Image runat="server" /></a>
-                <a href="#"><asp:Image runat="server" /></a>
-                <a href="#"><asp:Image runat="server" /></a>
-            </div>
+            <asp:Panel runat="server">
+                <asp:HyperLink NavigateUrl="navigateurl" runat="server">
+                    <asp:Image ImageUrl="imageurl" runat="server" />
+                </asp:HyperLink>
+                <asp:HyperLink NavigateUrl="navigateurl" runat="server">
+                    <asp:Image ImageUrl="imageurl" runat="server" />
+                </asp:HyperLink>
+                <asp:HyperLink NavigateUrl="navigateurl" runat="server">
+                    <asp:Image ImageUrl="imageurl" runat="server" />
+                </asp:HyperLink>
+                <asp:HyperLink NavigateUrl="navigateurl" runat="server">
+                    <asp:Image ImageUrl="imageurl" runat="server" />
+                </asp:HyperLink>
+                <asp:HyperLink NavigateUrl="navigateurl" runat="server">
+                    <asp:Image ImageUrl="imageurl" runat="server" />
+                </asp:HyperLink>
+            </asp:Panel>
         </div>
     <div>
         <asp:TextBox runat="server" ID="QueryStringLabel" TextMode="MultiLine" Width="800" Height="800" />
-        <br />
+        <asp:RequiredFieldValidator ErrorMessage="Du måste välja en fil först!" ControlToValidate="FileUpload1" runat="server" />
+        <asp:RegularExpressionValidator ErrorMessage="errormessage" ControlToValidate="QueryStringLabel" runat="server" />
         <asp:FileUpload ID="FileUpload1" runat="server" />
         <asp:Button Text="Ladda upp" ID="UploadButton" runat="server" OnClick="UploadButton_Click" />
     </div>
