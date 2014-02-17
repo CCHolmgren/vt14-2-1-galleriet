@@ -39,7 +39,7 @@ namespace Galleriet
             if (thumb)
                 return Path.Combine("images/thumbnails", name);
             else if (ImageExsists(name))
-                return Path.Combine("Images", name);
+                return Path.Combine("images", name);
             return "";
         }
         public static bool ImageExsists(string name)
@@ -53,26 +53,29 @@ namespace Galleriet
         }
         public string SaveImage(Stream stream, string fileName)
         {
+            Stream thumbStream = stream;
+            if (!ApprovedExtensions.IsMatch(fileName))
+                throw new ArgumentException();
+
+            fileName = SanitizePath.Replace(fileName, "");
+            string tempFileName = fileName;
+            string thumbnailPath = Path.Combine(PhysicalUploadedImagesPath, "thumbnails");
+            var image = System.Drawing.Image.FromStream(thumbStream);
+            int counter = 0;
+            /*while (File.Exists(Path.Combine(thumbnailPath, fileName)))
+            {
+                tempFileName = Path.GetFileNameWithoutExtension(fileName) + counter + Path.GetExtension(fileName);
+            }*/
+            stream.Position = 0;
             using(var fs = File.Create(Path.Combine(PhysicalUploadedImagesPath, fileName)))
             {
                 stream.CopyTo(fs);
             }
-            return "";
-            /*
-            fileName = SanitizePath.Replace(fileName, "");
-            if (!ApprovedExtensions.IsMatch(fileName))
+            /*if (!IsValidImage(image))
                 throw new ArgumentException();
-
-            string thumbnailPath = Path.Combine(PhysicalUploadedImagesPath, "thumbnails");
-            var image = System.Drawing.Image.FromStream(stream);
-            int counter = 0;
-            string tempFileName = fileName;
-
-            if (!IsValidImage(image))
-                throw new ArgumentException();
-
-            //var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
-            Bitmap thumbnail = new Bitmap(60, 45);
+            */
+            var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
+            /*Bitmap thumbnail = new Bitmap(60, 45);
             using (Graphics gr = Graphics.FromImage(image))
             {
                 gr.SmoothingMode = SmoothingMode.HighQuality;
@@ -80,17 +83,14 @@ namespace Galleriet
                 gr.PixelOffsetMode = PixelOffsetMode.HighQuality;
                 gr.DrawImage(thumbnail, new Rectangle(0, 0, 60, 45));
             }
-            while (File.Exists(Path.Combine(thumbnailPath, fileName)))
-            {
-                tempFileName = Path.GetFileNameWithoutExtension(fileName) + counter + Path.GetExtension(fileName);
-            }
+            */
             thumbnail.Save(Path.Combine(thumbnailPath, tempFileName));
 
-            using(var fs = File.Create(Path.Combine(PhysicalUploadedImagesPath, tempFileName)))
+            /*using(var fs = File.Create(Path.Combine(PhysicalUploadedImagesPath, tempFileName)))
             {
                 stream.CopyTo(fs);
-            }
-            return Path.Combine(PhysicalUploadedImagesPath, tempFileName);*/
+            }*/
+            return Path.Combine(PhysicalUploadedImagesPath, tempFileName);
         }
         
     }

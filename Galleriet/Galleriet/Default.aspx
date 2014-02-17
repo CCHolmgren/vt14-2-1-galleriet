@@ -15,7 +15,7 @@
             <asp:Image ImageUrl="imageurl" ID="Largeimage" runat="server" Visible="false"/>
             <asp:Repeater ID="repeater" runat="server" ItemType="Galleriet.LinkData" SelectMethod="repeater_GetData">
                 <ItemTemplate>
-                    <asp:HyperLink NavigateUrl="<%# Item.Link %>" runat="server">
+                    <asp:HyperLink NavigateUrl='<%# "?file=" + Item.Name %>' runat="server">
                         <asp:Image ImageUrl="<%# Item.thumbLink  %>" runat="server" />
                     </asp:HyperLink>
                 </ItemTemplate>

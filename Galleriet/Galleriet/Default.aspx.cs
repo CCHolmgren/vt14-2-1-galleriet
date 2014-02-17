@@ -20,7 +20,9 @@ namespace Galleriet
             Largeimage.Visible = true;
             foreach(string s in g.GetImageNames())
             {
-                QueryStringLabel.Text += s + "\n";
+                QueryStringLabel.Text += s + " ";
+                QueryStringLabel.Text += Gallery.GetImagePath(s) + "\n";
+                QueryStringLabel.Text += Gallery.GetImagePath(s, true) + "\n";
             }
             /*QueryStringLabel.Text = Request.Url.PathAndQuery + "\n";
             QueryStringLabel.Text += Request.Url.Query + "\n";
