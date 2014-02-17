@@ -52,7 +52,7 @@ namespace Galleriet
 
             while (File.Exists(Path.Combine(thumbnailPath, fileName)))
             {
-                tempFileName = fileName + counter;
+                tempFileName = Path.GetFileNameWithoutExtension(fileName) + counter + Path.GetExtension(fileName);
             }
             thumbnail.Save(Path.Combine(thumbnailPath, tempFileName));
 
