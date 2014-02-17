@@ -11,7 +11,11 @@ namespace Galleriet
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            QueryStringLabel.Text = Request.Url.PathAndQuery + "\n";
+            if (!Page.IsPostBack)
+                Page.Session["gallery"] = new Gallery();
+            Gallery g = (Gallery)Page.Session["gallery"];
+            Largeimage.ImageUrl = g.GetImagePath(Request.QueryString["file"]);
+            /*QueryStringLabel.Text = Request.Url.PathAndQuery + "\n";
             QueryStringLabel.Text += Request.Url.Query + "\n";
             QueryStringLabel.Text += Request.QueryString["file"] + "\n";
             QueryStringLabel.Text += Request.Path + "\n";
@@ -26,7 +30,7 @@ namespace Galleriet
             QueryStringLabel.Text += Request.PathInfo + "\n";
             QueryStringLabel.Text += Request.Path + "\n";
             QueryStringLabel.Text += Request.FilePath + "\n";
-            QueryStringLabel.Text += AppDomain.CurrentDomain.GetData("APPBASE").ToString();
+            QueryStringLabel.Text += AppDomain.CurrentDomain.GetData("APPBASE").ToString();*/
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)
@@ -34,7 +38,10 @@ namespace Galleriet
             QueryStringLabel.Text += String.Join(" ",FileUpload1.FileName.Split('.'));
             QueryStringLabel.Text += FileUpload1.FileName.Split('.').Last()+"\n";
             QueryStringLabel.Text += System.IO.Path.GetExtension(FileUpload1.FileName);
-            Response.Redirect(Request.Path + "/Yes");
+
+            Gallery g = (Gallery)Page.Session["gallery"];
+            g.SaveImage(FileUpload1.FileContent, FileUpload1.FileName);
+            Response.Redirect("?file=" + FileUpload1.FileName);
         }
     }
 }
