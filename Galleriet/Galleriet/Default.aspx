@@ -9,7 +9,24 @@
     <script src="Main.js"></script>
 </head>
 <body>
+    <h1>Galleriet</h1>
     <form id="form1" runat="server">
+        <div>
+            <asp:Image ImageUrl="imageurl" ID="Largeimage" runat="server" />
+            <div>
+                <a href="#"><asp:Image runat="server" /></a>
+                <a href="#"><asp:Image runat="server" /></a>
+                <a href="#"><asp:Image runat="server" /></a>
+                <a href="#"><asp:Image runat="server" /></a>
+                <a href="#"><asp:Image runat="server" /></a>
+                <a href="#"><asp:Image runat="server" /></a>
+                <a href="#"><asp:Image runat="server" /></a>
+                <a href="#"><asp:Image runat="server" /></a>
+                <a href="#"><asp:Image runat="server" /></a>
+                <a href="#"><asp:Image runat="server" /></a>
+                <a href="#"><asp:Image runat="server" /></a>
+            </div>
+        </div>
     <div>
         <asp:TextBox runat="server" ID="QueryStringLabel" TextMode="MultiLine" Width="800" Height="800" />
         <br />
