@@ -7,6 +7,7 @@
     <head runat="server">
         <title>Galleriet</title>
         <link href="Main.css" rel="stylesheet" />
+        <link href="Whydoesntitworkdamn.css" rel="stylesheet" />
         <script src="Main.js"></script>
     </head>
     <body>

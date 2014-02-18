@@ -60,7 +60,10 @@
     <Content Include="Default.aspx" />
     <Content Include="Main.css" />
     <Content Include="Main.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Whydoesntitworkdamn.css" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
