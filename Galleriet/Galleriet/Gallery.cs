@@ -53,13 +53,16 @@ namespace Galleriet
         public string SaveImage(Stream stream, string fileName)
         {
             Stream thumbStream = stream;
+            var image = System.Drawing.Image.FromStream(thumbStream);
+            if (!IsValidImage(image))
+                throw new ArgumentException();
             if (!ApprovedExtensions.IsMatch(fileName))
                 throw new ArgumentException();
 
             fileName = SanitizePath.Replace(fileName, "");
             string tempFileName = fileName;
             string thumbnailPath = Path.Combine(PhysicalUploadedImagesPath, "thumbnails");
-            var image = System.Drawing.Image.FromStream(thumbStream);
+            
             int counter = 0;
             while (true)
             {
@@ -74,9 +77,7 @@ namespace Galleriet
             {
                 stream.CopyTo(fs);
             }
-            /*if (!IsValidImage(image))
-                throw new ArgumentException();
-            */
+            
             var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
             /*Bitmap thumbnail = new Bitmap(60, 45);
             using (Graphics gr = Graphics.FromImage(image))
@@ -85,8 +86,8 @@ namespace Galleriet
                 gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 gr.PixelOffsetMode = PixelOffsetMode.HighQuality;
                 gr.DrawImage(thumbnail, new Rectangle(0, 0, 60, 45));
-            }
-            */
+            }*/
+            
             thumbnail.Save(Path.Combine(thumbnailPath, tempFileName));
 
             /*using(var fs = File.Create(Path.Combine(PhysicalUploadedImagesPath, tempFileName)))

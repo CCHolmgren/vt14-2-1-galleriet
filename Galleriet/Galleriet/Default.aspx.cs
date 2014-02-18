@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -58,12 +59,14 @@ namespace Galleriet
         public IEnumerable<Galleriet.LinkData> repeater_GetData()
         {
             var di = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), @"Images"));
+            var regex = new Regex("(.jpg|.gif|.png)", RegexOptions.IgnoreCase);
             return (from fi in di.GetFiles()
                     select new LinkData
                     {
                         Name = fi.Name,
                         Link = fi.FullName,
-                        thumbLink = Gallery.GetImagePath(fi.Name, true)
+                        thumbLink = Gallery.GetImagePath(fi.Name, true),
+                        Display = regex.IsMatch(fi.Name) ? true : false
                     }).AsEnumerable();
         }
     }

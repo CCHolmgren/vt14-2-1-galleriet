@@ -23,5 +23,10 @@ namespace Galleriet
             get;
             set;
         }
+        public bool Display
+        {
+            get;
+            set;
+        }
     }
 }
