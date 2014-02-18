@@ -64,7 +64,6 @@ namespace Galleriet
                 Page.Validators.Add(cv);
             }
         }
-
         public IEnumerable<Galleriet.LinkData> repeater_GetData()
         {
             var di = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), @"Images"));
@@ -79,5 +78,6 @@ namespace Galleriet
                         //Display = regex.IsMatch(fi.Name) ? true : false
                     }).AsEnumerable();
         }
+        
     }
 }
