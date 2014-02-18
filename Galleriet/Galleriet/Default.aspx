@@ -9,7 +9,6 @@
         <link href="Main.css" rel="stylesheet" />
         <script src="Main.js"></script>
     </head>
-
     <body>
         <h1>Galleriet</h1>
         <form id="form1" runat="server">
@@ -19,15 +18,14 @@
                 </li>
                 <li>
                     <div id="imageswitcher">
-                    <asp:Repeater ID="repeater" runat="server" ItemType="Galleriet.LinkData" SelectMethod="repeater_GetData">
-                        <ItemTemplate>
-                            <!--Visible=Item.Display-->
-                            <asp:HyperLink NavigateUrl='<%# "?file=" + Item.Name %>' runat="server">
-                                <asp:Image ImageUrl="<%# Item.thumbLink  %>" runat="server" />
-                            </asp:HyperLink>
-                        </ItemTemplate>
-                    </asp:Repeater>
-
+                        <asp:Repeater ID="repeater" runat="server" ItemType="Galleriet.LinkData" SelectMethod="repeater_GetData">
+                            <ItemTemplate>
+                                <!--Visible=Item.Display-->
+                                <asp:HyperLink NavigateUrl='<%# "?file=" + Item.Name %>' runat="server">
+                                    <asp:Image ImageUrl="<%# Item.thumbLink  %>" runat="server" />
+                                </asp:HyperLink>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
                 </li>
                 <li>
