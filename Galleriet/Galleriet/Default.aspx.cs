@@ -45,15 +45,24 @@ namespace Galleriet
 
         protected void UploadButton_Click(object sender, EventArgs e)
         {
-            QueryStringLabel.Text += String.Join(" ",FileUpload1.FileName.Split('.'));
+            QueryStringLabel.Text += String.Join(" ",FileUpload1.FileName.Split('.')) + "\n";
             QueryStringLabel.Text += FileUpload1.FileName.Split('.').Last()+"\n";
             QueryStringLabel.Text += System.IO.Path.GetExtension(FileUpload1.FileName);
 
             
             Gallery g = (Gallery)Page.Session["gallery"];
-            
-            g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
-            Response.Redirect("?file=" + FileUpload1.FileName);
+            try
+            {
+                g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
+                Response.Redirect("?file=" + FileUpload1.FileName);
+            }
+            catch (ArgumentException ax)
+            {
+                CustomValidator cv = new CustomValidator();
+                cv.ErrorMessage = "Ett fel uppstod med uppladdningen av filen.";
+                cv.IsValid = false;
+                Page.Validators.Add(cv);
+            }
         }
 
         public IEnumerable<Galleriet.LinkData> repeater_GetData()
