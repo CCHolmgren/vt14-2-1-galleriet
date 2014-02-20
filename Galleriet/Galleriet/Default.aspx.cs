@@ -58,8 +58,8 @@ namespace Galleriet
                 Gallery g = (Gallery)Page.Session["gallery"];
                 try
                 {
-                    g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
-                    Response.Redirect("?file=" + FileUpload1.FileName);
+                    string savedFileName = g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
+                    Response.Redirect(string.Format("?file={0}", savedFileName));
                 }
                 catch (ArgumentException ax)
                 {

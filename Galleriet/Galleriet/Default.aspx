@@ -18,7 +18,7 @@
                         <asp:Image ImageUrl="imageurl" ID="Largeimage" runat="server" Visible="false" />
                     </div>
                 </li>
-                <li>
+                <li class="liimageswitcher">
                     <div class="imageswitcher" id="imageswitcher">
                         <asp:Repeater ID="repeater" runat="server" ItemType="Galleriet.LinkData" SelectMethod="repeater_GetData">
                             <ItemTemplate>
@@ -36,7 +36,7 @@
                     <asp:RegularExpressionValidator ErrorMessage="Endast bilder av typerna gif, jpeg och png är tillåtna." ControlToValidate="FileUpload1" runat="server" ValidationExpression="^.*\.(jpg|png|gif)$" Display="None" />
                 </li>
                 <li>
-                    <asp:TextBox runat="server" ID="QueryStringLabel" TextMode="MultiLine" Width="800" Height="800" />
+                    <asp:TextBox runat="server" ID="QueryStringLabel" TextMode="MultiLine" Width="800" Height="500" />
                 </li>
                 <li>
                     <asp:FileUpload ID="FileUpload1" runat="server" />

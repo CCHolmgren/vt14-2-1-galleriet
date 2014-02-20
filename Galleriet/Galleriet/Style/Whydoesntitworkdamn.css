@@ -10,9 +10,15 @@ img {
     width: 75%;
 }
 .imageswitcher {
-    width: 75%;
-    overflow-x: scroll;
+    display: inline-block;
 }
 .imageswitcher img {
     width: 5%;
+}
+.liimageswitcher {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 70px;
+    width: 75%;
+    white-space: nowrap;
 }

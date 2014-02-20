@@ -166,7 +166,7 @@ namespace Galleriet
             var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
             thumbnail.Save(Path.Combine(PhysicalUploadedThumbnailsPath, tempFileName));
 
-            return Path.Combine(PhysicalUploadedImagesPath, tempFileName);
+            return tempFileName;
         }
 
         public enum ImageFormat
