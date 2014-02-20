@@ -17,8 +17,12 @@ namespace Galleriet
                 Page.Session["gallery"] = new Gallery();
 
             Gallery g = (Gallery)Page.Session["gallery"];
-            Largeimage.ImageUrl = Gallery.GetImagePath(Request.QueryString["file"]);
-            Largeimage.Visible = true;
+            //We don't want to send in filename if ?file= is null
+            if (Request.QueryString["file"] != null)
+            {
+                Largeimage.ImageUrl = Gallery.GetImagePath(Request.QueryString["file"]);
+                Largeimage.Visible = true;
+            }
             foreach(string s in g.GetImageNames())
             {
                 QueryStringLabel.Text += s + " ";
@@ -45,38 +49,30 @@ namespace Galleriet
 
         protected void UploadButton_Click(object sender, EventArgs e)
         {
-            QueryStringLabel.Text += String.Join(" ",FileUpload1.FileName.Split('.')) + "\n";
-            QueryStringLabel.Text += FileUpload1.FileName.Split('.').Last()+"\n";
-            QueryStringLabel.Text += System.IO.Path.GetExtension(FileUpload1.FileName);
+            if (Page.IsValid)
+            {
+                /*QueryStringLabel.Text += String.Join(" ", FileUpload1.FileName.Split('.')) + "\n";
+                QueryStringLabel.Text += FileUpload1.FileName.Split('.').Last() + "\n";
+                QueryStringLabel.Text += System.IO.Path.GetExtension(FileUpload1.FileName);*/
 
-            
-            Gallery g = (Gallery)Page.Session["gallery"];
-            try
-            {
-                g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
-                Response.Redirect("?file=" + FileUpload1.FileName);
-            }
-            catch (ArgumentException ax)
-            {
-                CustomValidator cv = new CustomValidator();
-                cv.ErrorMessage = "Ett fel uppstod med uppladdningen av filen.";
-                cv.IsValid = false;
-                Page.Validators.Add(cv);
+                Gallery g = (Gallery)Page.Session["gallery"];
+                try
+                {
+                    g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
+                    Response.Redirect("?file=" + FileUpload1.FileName);
+                }
+                catch (ArgumentException ax)
+                {
+                    CustomValidator cv = new CustomValidator();
+                    cv.ErrorMessage = "Ett fel uppstod med uppladdningen av filen.";
+                    cv.IsValid = false;
+                    Page.Validators.Add(cv);
+                }
             }
         }
         public IEnumerable<Galleriet.LinkData> repeater_GetData()
         {
-            var di = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), @"Images"));
-            var regex = new Regex("(.jpg|.gif|.png)", RegexOptions.IgnoreCase);
-            return (from fi in di.GetFiles()
-                    where regex.IsMatch(fi.Name)
-                    select new LinkData
-                    {
-                        Name = fi.Name,
-                        Link = fi.FullName,
-                        thumbLink = Gallery.GetImagePath(fi.Name, true),
-                        //Display = regex.IsMatch(fi.Name) ? true : false
-                    }).AsEnumerable();
+            return Gallery.GetImagesPath();
         }
         
     }

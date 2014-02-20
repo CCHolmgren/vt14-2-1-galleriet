@@ -1,0 +1,18 @@
+﻿body {
+}
+ol{
+    list-style-type: none;
+}
+img {
+    width: 100%;
+}
+.largeimage {
+    width: 75%;
+}
+.imageswitcher {
+    width: 75%;
+    overflow-x: scroll;
+}
+.imageswitcher img {
+    width: 5%;
+}

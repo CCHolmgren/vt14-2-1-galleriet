@@ -58,12 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
-    <Content Include="Main.css" />
-    <Content Include="Main.js" />
+    <Content Include="Style\Main.css" />
+    <Content Include="Scripts\Main.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Whydoesntitworkdamn.css" />
+    <Content Include="Style\Whydoesntitworkdamn.css" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -73,8 +73,8 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Gallery.cs" />
-    <Compile Include="LinkData.cs" />
+    <Compile Include="Model\Gallery.cs" />
+    <Compile Include="Model\LinkData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

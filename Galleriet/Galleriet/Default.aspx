@@ -6,19 +6,20 @@
 
     <head runat="server">
         <title>Galleriet</title>
-        <link href="Main.css" rel="stylesheet" />
-        <link href="Whydoesntitworkdamn.css" rel="stylesheet" />
-        <script src="Main.js"></script>
+        <link href="/Style/Whydoesntitworkdamn.css" rel="stylesheet" />
+        <script src="/Scripts/Main.js"></script>
     </head>
     <body>
         <h1>Galleriet</h1>
         <form id="form1" runat="server">
             <ol>
                 <li>
-                    <asp:Image ImageUrl="imageurl" ID="Largeimage" runat="server" Visible="false" />
+                    <div class="largeimage">
+                        <asp:Image ImageUrl="imageurl" ID="Largeimage" runat="server" Visible="false" />
+                    </div>
                 </li>
                 <li>
-                    <div id="imageswitcher">
+                    <div class="imageswitcher" id="imageswitcher">
                         <asp:Repeater ID="repeater" runat="server" ItemType="Galleriet.LinkData" SelectMethod="repeater_GetData">
                             <ItemTemplate>
                                 <!--Visible=Item.Display-->
