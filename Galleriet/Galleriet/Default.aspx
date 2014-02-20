@@ -6,8 +6,9 @@
 
     <head runat="server">
         <title>Galleriet</title>
-        <link href="/Style/Whydoesntitworkdamn.css" rel="stylesheet" />
-        <script src="/Scripts/Main.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="Scripts/Main.js"></script>
+        <link href="Style/Whydoesntitworkdamn.css" rel="stylesheet" />
     </head>
     <body>
         <h1>Galleriet</h1>
@@ -23,7 +24,7 @@
                         <asp:Repeater ID="repeater" runat="server" ItemType="Galleriet.LinkData" SelectMethod="repeater_GetData">
                             <ItemTemplate>
                                 <!--Visible=Item.Display-->
-                                <asp:HyperLink NavigateUrl='<%# "?file=" + Item.Name %>' runat="server">
+                                <asp:HyperLink NavigateUrl='<%# String.Format("?file={0}", Item.FileName) %>' runat="server">
                                     <asp:Image ImageUrl="<%# Item.thumbLink  %>" runat="server" />
                                 </asp:HyperLink>
                             </ItemTemplate>
@@ -44,6 +45,7 @@
                 </li>
             </ol>
         </form>
+        <script src="Scripts/Main.js"></script>
     </body>
 
     </html>

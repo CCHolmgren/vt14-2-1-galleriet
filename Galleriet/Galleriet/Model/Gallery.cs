@@ -75,8 +75,8 @@ namespace Galleriet
                     where regex.IsMatch(fi.Name)
                     select new LinkData
                     {
-                        Name = fi.Name,
-                        Link = fi.FullName,
+                        FileName = fi.Name,
+                        FullLink = fi.FullName,
                         thumbLink = Gallery.GetImagePath(fi.Name, true),
                         //I used a Display variable first, but the current way is much better
                         //Display = regex.IsMatch(fi.Name) ? true : false

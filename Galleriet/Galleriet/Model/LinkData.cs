@@ -10,12 +10,12 @@ namespace Galleriet
 
     public class LinkData
     {
-        public string Name
+        public string FileName
         {
             get;
             set;
         }
-        public string Link
+        public string FullLink
         {
             get;
             set;
