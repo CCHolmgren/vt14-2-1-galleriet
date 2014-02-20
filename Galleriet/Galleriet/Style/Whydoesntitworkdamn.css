@@ -4,16 +4,20 @@ ol{
     list-style-type: none;
 }
 img {
-    width: 100%;
 }
 .largeimage {
     width: 75%;
 }
+.largeimage img {
+    width: 100%;
+}
 .imageswitcher {
     display: inline-block;
 }
-.imageswitcher img {
-    width: 5%;
+.imageswitcher a {
+    width:60px;
+    height:45px;
+    display:inline-block;
 }
 .liimageswitcher {
     overflow-x: scroll;
@@ -21,4 +25,7 @@ img {
     height: 70px;
     width: 75%;
     white-space: nowrap;
+}
+.current {
+    border: 2px solid green;
 }
