@@ -41,11 +41,14 @@
                     <asp:RegularExpressionValidator ErrorMessage="Endast bilder av typerna gif, jpeg och png är tillåtna." ControlToValidate="FileUpload1" runat="server" ValidationExpression="^.*\.(jpg|png|gif)$" Display="None" />
                 </li>
                 <li>
-                    <asp:TextBox runat="server" ID="QueryStringLabel" TextMode="MultiLine" Width="800" Height="500" />
+                    <asp:TextBox runat="server" ID="QueryStringLabel" Visible="false" TextMode="MultiLine" Width="800" Height="500" />
                 </li>
                 <li>
-                    <asp:FileUpload ID="FileUpload1" runat="server" />
-                    <asp:Button Text="Ladda upp" ID="UploadButton" runat="server" OnClick="UploadButton_Click" />
+                    <fieldset class="largeimage">
+                        <legend>Ladda upp bild</legend>
+                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                        <asp:Button Text="Ladda upp" ID="UploadButton" runat="server" OnClick="UploadButton_Click" />
+                    </fieldset>
                 </li>
             </ol>
         </form>

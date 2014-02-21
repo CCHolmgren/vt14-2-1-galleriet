@@ -57,7 +57,7 @@ namespace Galleriet
                 Gallery g = Gallery;
                 try
                 {
-                    string savedFileName = g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
+                    string savedFileName = g.SaveImage(FileUpload1.FileContent, FileUpload1.PostedFile.FileName);
                     Successmessage = String.Format("Bilden '{0}' laddades upp utan problem!", savedFileName);
                     Response.Redirect(string.Format("?file={0}", savedFileName));
                 }
