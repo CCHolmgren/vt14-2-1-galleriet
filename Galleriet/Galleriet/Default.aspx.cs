@@ -11,34 +11,22 @@ namespace Galleriet
 {
     public partial class Default : System.Web.UI.Page
     {
-        public Gallery gallery
+        public Gallery Gallery
         {
-            get
-            {
-                return Session["gallery"] as Gallery;
-            }
-            set
-            {
-                Session["gallery"] = value;
-            }
+            get { return Session["gallery"] as Gallery; }
+            set { Session["gallery"] = value; }
         }
         private string Successmessage
         {
-            get
-            {
-                return Session["successmessage"] as string;
-            }
-            set
-            {
-                Session["successmessage"] = value;
-            }
+            get { return Session["successmessage"] as string; }
+            set { Session["successmessage"] = value; }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-                gallery = new Gallery();
+                Gallery = new Gallery();
 
-            Gallery g = gallery;
+            Gallery g = Gallery;
             //We don't want to send in filename if ?file= is null
             if (Request.QueryString["file"] != null)
             {
@@ -55,9 +43,9 @@ namespace Galleriet
             {
                 UploadPanel.Visible = true;
                 UploadLabel.Text = Successmessage;
+                Successmessage = null;
             }
         }
-
         protected void UploadButton_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -66,10 +54,11 @@ namespace Galleriet
                 QueryStringLabel.Text += FileUpload1.FileName.Split('.').Last() + "\n";
                 QueryStringLabel.Text += System.IO.Path.GetExtension(FileUpload1.FileName);*/
 
-                Gallery g = gallery;
+                Gallery g = Gallery;
                 try
                 {
                     string savedFileName = g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
+                    Successmessage = String.Format("Bilden '{0}' laddades upp utan problem!", savedFileName);
                     Response.Redirect(string.Format("?file={0}", savedFileName));
                 }
                 catch (ArgumentException ax)
@@ -86,6 +75,5 @@ namespace Galleriet
         {
             return Gallery.GetImagesPath();
         }
-        
     }
 }

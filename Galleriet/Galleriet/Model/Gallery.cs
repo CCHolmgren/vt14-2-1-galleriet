@@ -124,11 +124,11 @@ namespace Galleriet
 
             //If the extension isn't allowed then it's a failure
             if (!ApprovedExtensions.IsMatch(fileName))
-                throw new ArgumentException("The image must be of type jpeg, gif or png.");
+                throw new ArgumentException("Bilden måste vara av typen jpeg, gif eller png.");
             //The extension might be correct, but only if the extension and the bytes are correct can we safely use the image
             //This could, of course, be spoofed as well, but there isn't much more we can do
             if (GetImageFormat(bytes) == ImageFormat.Unknown)
-                throw new ArgumentException("The image must be of type jpeg, gif or png.");
+                throw new ArgumentException("Bilden måste vara av typen jpeg, gif eller png.");
 
             var image = System.Drawing.Image.FromStream(thumbStream);
 

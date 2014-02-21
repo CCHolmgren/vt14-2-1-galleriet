@@ -14,6 +14,10 @@
 $(function () {
     'use strict';
 
+    $('#successbutton').click(function () {
+        $(this).parent().remove();
+    });
+
     var anchor = $('#imageswitcher a');
 
     anchor.each(function (index) {

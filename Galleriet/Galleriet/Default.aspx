@@ -13,10 +13,9 @@
     <body>
         <h1>Galleriet</h1>
         <form id="form1" runat="server">
-            <asp:Panel ID="UploadPanel" Visible="false" runat="server">
-                <asp:Label ID="UploadLabel" Text="" runat="server">
-                    <a href="#">yes</a>
-                </asp:Label>
+            <asp:Panel ID="UploadPanel" CssClass="successcontainer" Visible="false" runat="server">
+                <asp:Label ID="UploadLabel" Text="" CssClass="successmessage" runat="server" />
+                <a href="#" class="successbutton" id="successbutton">X</a>
             </asp:Panel>
             <ol>
                 <li>
