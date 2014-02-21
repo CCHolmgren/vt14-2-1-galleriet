@@ -11,40 +11,51 @@ namespace Galleriet
 {
     public partial class Default : System.Web.UI.Page
     {
+        public Gallery gallery
+        {
+            get
+            {
+                return Session["gallery"] as Gallery;
+            }
+            set
+            {
+                Session["gallery"] = value;
+            }
+        }
+        private string Successmessage
+        {
+            get
+            {
+                return Session["successmessage"] as string;
+            }
+            set
+            {
+                Session["successmessage"] = value;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-                Page.Session["gallery"] = new Gallery();
+                gallery = new Gallery();
 
-            Gallery g = (Gallery)Page.Session["gallery"];
+            Gallery g = gallery;
             //We don't want to send in filename if ?file= is null
             if (Request.QueryString["file"] != null)
             {
                 Largeimage.ImageUrl = Gallery.GetImagePath(Request.QueryString["file"]);
                 Largeimage.Visible = true;
             }
-            foreach(string s in g.GetImageNames())
+            /*foreach(string s in g.GetImageNames())
             {
                 QueryStringLabel.Text += s + " ";
                 QueryStringLabel.Text += Gallery.GetImagePath(s) + "\n";
                 QueryStringLabel.Text += Gallery.GetImagePath(s, true) + "\n";
+            }*/
+            if (Successmessage != null)
+            {
+                UploadPanel.Visible = true;
+                UploadLabel.Text = Successmessage;
             }
-            /*QueryStringLabel.Text = Request.Url.PathAndQuery + "\n";
-            QueryStringLabel.Text += Request.Url.Query + "\n";
-            QueryStringLabel.Text += Request.QueryString["file"] + "\n";
-            QueryStringLabel.Text += Request.Path + "\n";
-            QueryStringLabel.Text += Request.PathInfo + "\n";
-            QueryStringLabel.Text += Request.RawUrl + "\n";
-            QueryStringLabel.Text += Request.Url.OriginalString + "\n";
-            QueryStringLabel.Text += Request.Url.LocalPath + "\n";
-            QueryStringLabel.Text += Request.Url.Fragment + "\n";
-            QueryStringLabel.Text += Request.Url.AbsoluteUri + "\n";
-            QueryStringLabel.Text += Request.Url.AbsolutePath + "\n";
-            QueryStringLabel.Text += Request.RawUrl + "\n";
-            QueryStringLabel.Text += Request.PathInfo + "\n";
-            QueryStringLabel.Text += Request.Path + "\n";
-            QueryStringLabel.Text += Request.FilePath + "\n";
-            QueryStringLabel.Text += AppDomain.CurrentDomain.GetData("APPBASE").ToString();*/
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)
@@ -55,7 +66,7 @@ namespace Galleriet
                 QueryStringLabel.Text += FileUpload1.FileName.Split('.').Last() + "\n";
                 QueryStringLabel.Text += System.IO.Path.GetExtension(FileUpload1.FileName);*/
 
-                Gallery g = (Gallery)Page.Session["gallery"];
+                Gallery g = gallery;
                 try
                 {
                     string savedFileName = g.SaveImage(FileUpload1.PostedFile.InputStream, FileUpload1.PostedFile.FileName);
@@ -63,10 +74,11 @@ namespace Galleriet
                 }
                 catch (ArgumentException ax)
                 {
-                    CustomValidator cv = new CustomValidator();
-                    cv.ErrorMessage = "Ett fel uppstod med uppladdningen av filen.";
+                    ModelState.AddModelError("", ax.Message);
+                    /*CustomValidator cv = new CustomValidator();
+                    cv.ErrorMessage = ax.Message;
                     cv.IsValid = false;
-                    Page.Validators.Add(cv);
+                    Page.Validators.Add(cv);*/
                 }
             }
         }

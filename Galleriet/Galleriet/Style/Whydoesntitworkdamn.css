@@ -6,7 +6,7 @@ ol{
 img {
 }
 .largeimage {
-    width: 75%;
+    width: 60%;
 }
 .largeimage img {
     width: 100%;
@@ -23,7 +23,7 @@ img {
     overflow-x: scroll;
     overflow-y: hidden;
     height: 70px;
-    width: 75%;
+    width: 60%;
     white-space: nowrap;
 }
 .current {

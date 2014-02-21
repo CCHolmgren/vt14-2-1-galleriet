@@ -13,6 +13,11 @@
     <body>
         <h1>Galleriet</h1>
         <form id="form1" runat="server">
+            <asp:Panel ID="UploadPanel" Visible="false" runat="server">
+                <asp:Label ID="UploadLabel" Text="" runat="server">
+                    <a href="#">yes</a>
+                </asp:Label>
+            </asp:Panel>
             <ol>
                 <li>
                     <div class="largeimage">
