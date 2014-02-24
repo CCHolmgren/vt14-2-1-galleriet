@@ -33,12 +33,6 @@ namespace Galleriet
                 Largeimage.ImageUrl = Gallery.GetImagePath(Request.QueryString["file"]);
                 Largeimage.Visible = true;
             }
-            /*foreach(string s in g.GetImageNames())
-            {
-                QueryStringLabel.Text += s + " ";
-                QueryStringLabel.Text += Gallery.GetImagePath(s) + "\n";
-                QueryStringLabel.Text += Gallery.GetImagePath(s, true) + "\n";
-            }*/
             if (Successmessage != null)
             {
                 UploadPanel.Visible = true;
@@ -50,10 +44,6 @@ namespace Galleriet
         {
             if (Page.IsValid)
             {
-                /*QueryStringLabel.Text += String.Join(" ", FileUpload1.FileName.Split('.')) + "\n";
-                QueryStringLabel.Text += FileUpload1.FileName.Split('.').Last() + "\n";
-                QueryStringLabel.Text += System.IO.Path.GetExtension(FileUpload1.FileName);*/
-
                 Gallery g = Gallery;
                 try
                 {
@@ -64,10 +54,6 @@ namespace Galleriet
                 catch (ArgumentException ax)
                 {
                     ModelState.AddModelError("", ax.Message);
-                    /*CustomValidator cv = new CustomValidator();
-                    cv.ErrorMessage = ax.Message;
-                    cv.IsValid = false;
-                    Page.Validators.Add(cv);*/
                 }
             }
         }

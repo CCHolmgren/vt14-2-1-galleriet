@@ -17,6 +17,9 @@ namespace Galleriet
         static string PhysicalUploadedImagesPath;
         static string PhysicalUploadedThumbnailsPath;
 
+        /// <summary>
+        /// Initializes the strings and regex we use
+        /// </summary>
         static Gallery()
         {
             var invalidChars = new string(Path.GetInvalidFileNameChars());
@@ -128,7 +131,7 @@ namespace Galleriet
             //The extension might be correct, but only if the extension and the bytes are correct can we safely use the image
             //This could, of course, be spoofed as well, but there isn't much more we can do
             if (GetImageFormat(bytes) == ImageFormat.Unknown)
-                throw new ArgumentException("Bilden måste vara av typen jpeg, gif eller png.");
+                throw new ArgumentException("Bilden måste vara av typen jpeg, gif eller png. Kontrollera filformatet.");
 
             var image = System.Drawing.Image.FromStream(thumbStream);
 
@@ -152,15 +155,6 @@ namespace Galleriet
                 stream.CopyTo(fs);
             }
 
-            /*Bitmap thumbnail = new Bitmap(60, 45);
-            using (Graphics gr = Graphics.FromImage(image))
-            {
-                gr.SmoothingMode = SmoothingMode.HighQuality;
-                gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                gr.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                gr.DrawImage(thumbnail, new Rectangle(0, 0, 60, 45));
-            }*/
-
             //Create and save the thumbnail image
             //This will decrease the quality quite a lot, but it's an easy way to do it
             var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
@@ -168,7 +162,9 @@ namespace Galleriet
 
             return tempFileName;
         }
-
+        /// <summary>
+        /// Represents the result of GetImageFormat
+        /// </summary>
         public enum ImageFormat
         {
             Bmp,
@@ -181,8 +177,8 @@ namespace Galleriet
         /// <summary>
         /// Verifies the imageformat y using the bit signature of the different fileformats
         /// </summary>
-        /// <param name="bytes"></param>
-        /// <returns></returns>
+        /// <param name="bytes">The image in byte format</param>
+        /// <returns>Returns the result in form of the enum ImageFormat</returns>
         public static ImageFormat GetImageFormat(byte[] bytes)
         {
             // see http://www.mikekunz.com/image_file_header.html  
@@ -194,20 +190,11 @@ namespace Galleriet
             var jpeg = new byte[] { 255, 216, 255, 224 }; // jpeg
             var jpeg2 = new byte[] { 255, 216, 255, 225 }; // jpeg canon
 
-            /*if (bmp.SequenceEqual(bytes.Take(bmp.Length)))
-                return ImageFormat.Bmp;*/
-
             if (gif.SequenceEqual(bytes.Take(gif.Length)))
                 return ImageFormat.Gif;
 
             if (png.SequenceEqual(bytes.Take(png.Length)))
                 return ImageFormat.Png;
-
-            /*if (tiff.SequenceEqual(bytes.Take(tiff.Length)))
-                return ImageFormat.Tiff;
-
-            if (tiff2.SequenceEqual(bytes.Take(tiff2.Length)))
-                return ImageFormat.Tiff;*/
 
             if (jpeg.SequenceEqual(bytes.Take(jpeg.Length)))
                 return ImageFormat.Jpeg;
@@ -216,6 +203,16 @@ namespace Galleriet
                 return ImageFormat.Jpeg;
 
             return ImageFormat.Unknown;
+
+            //These commented out functions are things that we do not want to check against in this application
+            /*if (bmp.SequenceEqual(bytes.Take(bmp.Length)))
+                return ImageFormat.Bmp;*/
+
+            /*if (tiff.SequenceEqual(bytes.Take(tiff.Length)))
+                return ImageFormat.Tiff;
+
+            if (tiff2.SequenceEqual(bytes.Take(tiff2.Length)))
+                return ImageFormat.Tiff;*/
         }
     }
 }
