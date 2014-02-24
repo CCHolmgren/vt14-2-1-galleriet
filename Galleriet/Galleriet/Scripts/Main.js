@@ -28,7 +28,7 @@ $(function () {
         var list = decodeURIComponent(location.search).split('&').filter(function (s) { return s.indexOf('file=') !== -1 }).sort()[0];
         if (href === list) {
             $(this).addClass('current');
-            console.log(".liimageswitcher.scrollLeft ",$('.liimageswitcher').scrollLeft(images * 45));
+            console.log(".liimageswitcher.scrollLeft ", $('.liimageswitcher').animate({ scrollLeft: images * 45 }, "slow"));
         }
     });
 });
