@@ -6,7 +6,7 @@
 
     <head runat="server">
         <title>Galleriet</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
         <script src="Scripts/Main.js"></script>
         <link href="Style/Whydoesntitworkdamn.css" rel="stylesheet" />
     </head>

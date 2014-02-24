@@ -19,15 +19,16 @@ $(function () {
     });
 
     var anchor = $('#imageswitcher a');
-
+    var images = 0;
     anchor.each(function (index) {
         var href = $(this).attr('href');
-
-        console.log($(this));
+        images += 1;
+        //console.log($(this));
 
         var list = decodeURIComponent(location.search).split('&').filter(function (s) { return s.indexOf('file=') !== -1 }).sort()[0];
         if (href === list) {
             $(this).addClass('current');
+            console.log(".liimageswitcher.scrollLeft ",$('.liimageswitcher').scrollLeft(images * 45));
         }
     });
 });
