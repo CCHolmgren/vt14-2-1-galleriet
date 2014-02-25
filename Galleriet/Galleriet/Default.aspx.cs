@@ -37,7 +37,7 @@ namespace Galleriet
             {
                 UploadPanel.Visible = true;
                 UploadLabel.Text = Successmessage;
-                Successmessage = null;
+                Session.Remove("successmessage");
             }
         }
         protected void UploadButton_Click(object sender, EventArgs e)
