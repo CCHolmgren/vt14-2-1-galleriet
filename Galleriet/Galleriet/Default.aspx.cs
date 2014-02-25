@@ -47,9 +47,14 @@ namespace Galleriet
                 Gallery g = Gallery;
                 try
                 {
-                    string savedFileName = g.SaveImage(FileUpload1.FileContent, FileUpload1.PostedFile.FileName);
-                    Successmessage = String.Format("Bilden '{0}' laddades upp utan problem!", savedFileName);
-                    Response.Redirect(string.Format("?file={0}", savedFileName));
+                    if (FileUpload1.PostedFile.ContentLength < 5242880) //5 mb
+                    {
+                        string savedFileName = g.SaveImage(FileUpload1.FileContent, FileUpload1.FileName);
+                        Successmessage = String.Format("Bilden '{0}' laddades upp utan problem!", savedFileName);
+                        Response.Redirect(string.Format("?file={0}", savedFileName));
+                    }
+                    else
+                        throw new ArgumentException("Filen är för stor. Maximal storlek är 5 mb.");
                 }
                 catch (ArgumentException ax)
                 {
