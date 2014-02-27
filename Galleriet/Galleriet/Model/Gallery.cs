@@ -189,6 +189,8 @@ namespace Galleriet
             var tiff2 = new byte[] { 77, 77, 42 };         // TIFF
             var jpeg = new byte[] { 255, 216, 255, 224 }; // jpeg
             var jpeg2 = new byte[] { 255, 216, 255, 225 }; // jpeg canon
+            var jpeg3 = new byte[] { 255, 216, 255, 226 };
+            var jpeg4 = new byte[] { 255, 216, 255 };
 
             if (gif.SequenceEqual(bytes.Take(gif.Length)))
                 return ImageFormat.Gif;
@@ -200,6 +202,12 @@ namespace Galleriet
                 return ImageFormat.Jpeg;
 
             if (jpeg2.SequenceEqual(bytes.Take(jpeg2.Length)))
+                return ImageFormat.Jpeg;
+
+            if (jpeg3.SequenceEqual(bytes.Take(jpeg3.Length)))
+                return ImageFormat.Jpeg;
+
+            if (jpeg4.SequenceEqual(bytes.Take(jpeg4.Length)))
                 return ImageFormat.Jpeg;
 
             return ImageFormat.Unknown;
