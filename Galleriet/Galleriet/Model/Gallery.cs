@@ -134,6 +134,8 @@ namespace Galleriet
                 throw new ArgumentException("Bilden måste vara av typen jpeg, gif eller png. Kontrollera filformatet.");
 
             var image = System.Drawing.Image.FromStream(thumbStream);
+            if (!IsValidImage(image))
+                throw new ArgumentException("Bilden måste vara av typen jpeg, gif eller png.");
 
             //A loop to determine if the Filename already exists
             //If it does, adda counter to the filename until we reach a filename that isn't used
