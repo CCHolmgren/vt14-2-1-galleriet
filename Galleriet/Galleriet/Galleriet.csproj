@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Error.htm" />
     <Content Include="Style\Main.css" />
     <Content Include="Scripts\Main.js" />
     <Content Include="Web.config">
